@@ -21,10 +21,18 @@ public class PlayerController : MonoBehaviour
     {
         float xInput = Input.GetAxisRaw("Horizontal");
         float yInput = Input.GetAxisRaw("Vertical");
-        if (isGrounded)
+      
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
-            playerObj.transform.Translate(Vector3.up * yInput * Time.deltaTime);
+                rb.AddRelativeForce(new Vector3(0, 180));  
+        }
+
+
+        if (isGrounded || rb.linearVelocity.y<0.25)
+        {
+         
             rb.AddRelativeForce(transform.right * xInput * Time.deltaTime * moveSpeed);
+
         }
 
         if (xInput!=0)
@@ -36,8 +44,8 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
         }
-
-
+        animator.SetBool("isGrounded", isGrounded);
+        animator.SetFloat("verticalSpeed", rb.linearVelocity.y);
 
 
 
@@ -58,7 +66,7 @@ public class PlayerController : MonoBehaviour
     }
    
  
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
