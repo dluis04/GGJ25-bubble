@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
     public Transform playerVisuals;
     public GameObject playerObj;
     public Rigidbody rb;
+    public Animator animator;
+
     public float moveSpeed;
     public bool isGrounded;
 
@@ -28,10 +30,14 @@ public class PlayerController : MonoBehaviour
         if (xInput!=0)
         {
             playerVisuals.localRotation = Quaternion.Euler(0, xInput < 0 ? -90 : 90, 0);
-
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
         }
 
-      
+
 
 
 
@@ -63,7 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            isGrounded = true;
+            isGrounded = false;
         }
     }
 }
