@@ -424,6 +424,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 2133464540659444041, guid: 7d2498d94ff934a47b9fde20bcf70925, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4268850482120052762, guid: 7d2498d94ff934a47b9fde20bcf70925, type: 3}
       propertyPath: m_Mass
       value: 0.5
@@ -487,6 +491,10 @@ PrefabInstance:
     - target: {fileID: 4328872515601162958, guid: 7d2498d94ff934a47b9fde20bcf70925, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228330767921554890, guid: 7d2498d94ff934a47b9fde20bcf70925, type: 3}
+      propertyPath: m_Height
+      value: 2.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
