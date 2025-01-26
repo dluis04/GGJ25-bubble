@@ -7,8 +7,11 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public Animator animator;
 
+    [Header("GROUND CHECK")]
     public float moveSpeed;
     public bool isGrounded;
+    public float groundCheckDistance;
+    public LayerMask groundLayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -64,20 +67,51 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("hi");
         //}   
     }
-   
- 
-    void OnCollisionStay(Collision collision)
+    private void FixedUpdate()
     {
-        if (collision.gameObject.tag == "Ground")
+        IsGrounded();
+    }
+
+
+    bool IsGrounded() 
+    {
+        float dist = GetComponent<Collider>().bounds.extents.y;
+
+        RaycastHit groundRay;
+        Vector3 center = GetComponent<Collider>().bounds.center;
+
+        Debug.DrawRay(center, Vector3.down * groundCheckDistance, Color.red);
+
+        bool hit = Physics.Raycast(center, Vector3.down, out groundRay, groundCheckDistance, groundLayer);
+
+        if (hit)
         {
             isGrounded = true;
+            Debug.Log("Grounded");
         }
-    }
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
+        else
         {
             isGrounded = false;
+            Debug.Log("AIR");
         }
+
+        return true;
+
     }
+   
+ 
+    //void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Ground")
+    //    {
+    //        isGrounded = true;
+    //    }
+    //}
+    //void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Ground")
+    //    {
+    //        isGrounded = false;
+    //    }
+    //}
 }
